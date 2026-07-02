@@ -1,3 +1,10 @@
+### Enjoy the game OFFLINE
+Enjoy mods like `World S`, `Arrange`, `Rising of Evil` and many more. 
+The game runs offline without the need for Steam or Internet. 
+
+## Supports Raz0r's Companion DLL and many more.
+This offline launcher supports Raz0r's Companion DLL, Qingshengs DLL, Kreeds Trainers and what ever more.
+
 ## Preservation Methods
 
 This repository offers three distinct methods to achieve offline decoupling and plugin loading, depending on your system configuration and preference.
