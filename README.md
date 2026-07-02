@@ -1,3 +1,4 @@
+![Alt text](art.jpg)   
 ### Enjoy the game OFFLINE
 Enjoy mods like `World S`, `Arrange`, `Rising of Evil` and many more. 
 The game runs offline without the need for Steam or Internet. 
