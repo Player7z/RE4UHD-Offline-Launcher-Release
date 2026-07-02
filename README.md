@@ -1,20 +1,25 @@
-# RE4UHD-Offline-Launcher-Release
-Enjoy mods like World S, Arrange and any other mods for this game OFFLINE without the need for Steam. A compilation of offline launch methods and plugin loaders designed to support the long-term preservation of Resident Evil 4 UHD Includes options for proxy DLL loading, an executable launcher, and a PE import patching utility.
+## Preservation Methods
 
-# Main Description & Release Notes
-Overview
-The RE4UHD Preservation Suite is designed to decouple Resident Evil 4 Ultimate HD Edition from online server dependencies, ensuring the game remains playable in offline environments. Additionally, all options integrate a custom plugin loader to automatically load .asi modifications (such as re4_tweaks).
-The release is split into three options to accommodate different operating systems, user preferences, and mod configurations.
-Package Contents & Setup Options
-This is a lightweight method that utilizes a custom winmm.dll proxy to load plugins and communicate with the emulator components.
-How to use: Place both winmm.dll and steamclient.dll directly next to your bio4.exe inside the Bin32 directory.
-Note: If steamclient.dll is not present, winmm.dll will safely fall back to acting purely as a standard .asi mod loader.
-This method bypasses system DLL proxy limitations (often present in newer Windows 10/11 environments) by using an external launcher to handle variables and process initialization.
-How to use: Place re4uhd_launcher.exe, re4uhd_launcher.dll, and steamclient.dll next to your bio4.exe in the Bin32 folder.
-Note: You must run the game using re4uhd_launcher.exe for the offline emulation and mod loading to initialize.
-An advanced utility designed for users who wish to permanently write the custom launcher DLL into the executable’s import table, avoiding the need for an external launcher or a system proxy DLL.
-How to use: Place Imports_Adder.exe in your game folder next to bio4.exe. Run the tool and follow the prompts to safely patch bio4.exe to natively import your chosen .dll file.
-Safety: The patcher automatically creates a backup named bio4.exe.unpatched before applying any changes to the binary.
-Credits & Acknowledgements
-Emulator Foundation: Built with assistance from the Goldberg Steam Emulator framework.
-Development & Assembly: Player7z
+This repository offers three distinct methods to achieve offline decoupling and plugin loading, depending on your system configuration and preference.
+
+### Method 1: DLL Proxy Method (`winmm.dll`)
+A lightweight, non-intrusive approach utilizing a system DLL proxy to load mods and communicate with the emulation components.
+
+*   **Files Required:** `winmm.dll`, `steamclient.dll` (Goldberg Emulator component).
+*   **Installation:** Place both files inside the game's `Bin32` folder next to `bio4.exe`.
+*   **Behavior:** When launched, `winmm.dll` will verify the presence of `steamclient.dll`. If it is not found, the proxy safely falls back to acting as a standard standalone `.asi` loader.
+
+### Method 2: Standalone Launcher Method (`re4uhd_launcher.exe` & `re4uhd_launcher.dll`)
+A robust injection method designed to bypass OS-level DLL proxy mitigations often found in newer versions of Windows 10 and 11.
+
+*   **Files Required:** `re4uhd_launcher.exe`, `re4uhd_launcher.dll`, `steamclient.dll`.
+*   **Installation:** Place all three files inside the `Bin32` folder next to `bio4.exe`.
+*   **Behavior:** Running `re4uhd_launcher.exe` sets the appropriate Steam environment variables, initializes the game process in a suspended state, injects `re4uhd_launcher.dll` to set up the registry redirect, and then resumes execution.
+
+### Method 3: Import Table Patching Method (`Imports_Adder.exe`)
+An advanced utility that permanently modifies the Import Address Table (IAT) of `bio4.exe` to natively require your custom decoupling DLL.
+
+*   **Files Required:** `Imports_Adder.exe`, `re4uhd_launcher.dll`.
+*   **Installation:** Place the utility and your target `.dll` inside the `Bin32` folder.
+*   **Behavior:** The patcher edits the PE headers of `bio4.exe` to append a new import entry. This ensures the game always loads the designated DLL on startup without needing an external launcher or system-level proxy.
+*   **Safety:** The utility automatically creates a backup of the untouched executable as `bio4.exe.unpatched` before applying any modifications.
